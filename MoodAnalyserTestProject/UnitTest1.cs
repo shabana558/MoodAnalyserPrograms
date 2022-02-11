@@ -65,8 +65,6 @@ namespace MoodAnalyserTestProject
             }
             //Assert
             Assert.AreEqual(expected, actual);
-
-
         }
         [TestCategory("Exception")]
         [TestMethod]
@@ -75,20 +73,63 @@ namespace MoodAnalyserTestProject
             ///AAA
             ///Arrange
             string message = "null";
-            string expected = "object reference not set to an instance of an object";
+            string expected = "Object reference not set to an instance of an object";
             MoodAnalyser mood = new MoodAnalyser(message);
-            string actual = null;
+
             try
             {
                 //Act
-                actual = mood.AnalyseMood();
+                string actual = mood.AnalyseMood();
             }
             catch (NullReferenceException ex)
             {
                 Assert.AreEqual(expected, ex.Message);
             }
 
+        }
+        [TestCategory("Exception")]
+        [TestMethod]
+        public void GivenNullMessageReturnCustomException()
+        {
+            ///AAA
+            ///Arrange
+            string message = "null";
+            string expected = "Message should not be null";
+            MoodAnalyser mood = new MoodAnalyser(message);
+            try
+            {
+                //Act
+                string actual = mood.AnalyseMood();
+            }
+            catch (NullReferenceException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
 
         }
+        [TestCategory("CustomException")]
+        [TestMethod]
+        public void GivenEmptyMessageReturnCustomException()
+        {
+            ///AAA
+            ///Arrange
+            string message = null;
+            string expected = "Message should not be empty";
+            MoodAnalyser mood = new MoodAnalyser(message);
+            try
+            {
+                //Act
+                string actual = mood.AnalyseMood();
+            }
+            catch (CustomMoodAnalyserException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+            //Assert
+        }
+
+
     }
+
+    
 }
