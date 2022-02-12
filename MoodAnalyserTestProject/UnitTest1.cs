@@ -141,7 +141,7 @@ namespace MoodAnalyserTestProject
         [TestMethod]
         public void Given_MoodAnalyser_using_Reflection_Return_defaultConstructor()
         {
-            Customer expected=new Customer();
+            Customer expected = new Customer();
             object obj = null;
             try
             {
@@ -154,13 +154,37 @@ namespace MoodAnalyserTestProject
                 throw new Exception(exception.Message);
 
             }
-          // obj.Equals(expected);
-          Assert.AreEqual(expected, obj);
+            // obj.Equals(expected);
+            Assert.AreEqual(expected, obj);
         }
 
-
-
+        [TestCategory("Reflection")]
+        [TestMethod]
+        public void Given_MoodAnalyserwithMessage_Using_reflection_Return_ParameterisedConstructor()
+        {
+            string message = "I am in happy mood";
+            MoodAnalyser expected = new MoodAnalyser(message);
+            object actual = null;
+            try
+            {
+                // MoodAnalyserFactory=new MoodAnalyserFactory();
+                //Act
+                actual = factory.CreateMoodAnalyserParameterisedObject("MoodAnalyser", "MoodAnalyser", message);
+            }
+            catch (CustomMoodAnalyserException exception)
+            {
+                //Assert
+                throw new Exception(exception.Message);
+            }
+            actual.Equals(expected);
+        }
     }
 
-
 }
+
+
+
+    
+
+
+
