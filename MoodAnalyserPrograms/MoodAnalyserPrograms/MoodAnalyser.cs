@@ -10,37 +10,53 @@ namespace MoodAnalyserPrograms
     public class MoodAnalyser
     {
         public string Message;
+        public MoodAnalyser()
+        {
+            Console.WriteLine("default constructor");
+        }
         public MoodAnalyser(string message)
         {
             this.Message = message;
         }
-        public string AnalyseMood()
+        public string AnalyseMood();
+        public override bool Equals(object obj)
         {
-            try
+            if (obj == null)
             {
-                if (this.Message.ToLower().Contains("happy"))
-
-                {
-                    return "happy";
-                }
-                else if (this.Message.Equals(string.Empty))
-                {
-                    throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.EMPTY_MOOD_EXCEPTION, "message should not be empty");
-                }
-                else
-                {
-                    return "sad";
-                }
+                return false;
             }
-            catch (NullReferenceException ex)
+            if (!(obj is MoodAnalyser))
             {
-                Console.WriteLine(ex);
-                   return "happy";
-                   throw new NullReferenceException();
-               throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NULL_MOOD_EXCEPTION,"message should not be null");
-
+                return false;
             }
+            MoodAnalyser moodAnalyseObject = (MoodAnalyser)obj;
+            return this.Message == moodAnalyseObject.Message;
+
+            //try
+            //{
+            //    if (this.Message.ToLower().Contains("happy"))
+
+            //    {
+            //        return "happy";
+            //    }
+            //    else if (this.Message.Equals(string.Empty))
+            //    {
+            //        throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.EMPTY_MOOD_EXCEPTION, "message should not be empty");
+            //    }
+            //    else
+            //    {
+            //        return "sad";
+            //    }
+            //}
+            //catch (NullReferenceException ex)
+            //{
+            //    Console.WriteLine(ex);
+            //    return "happy";
+            //    throw new NullReferenceException();
+            //    throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NULL_MOOD_EXCEPTION, "message should not be null");
+
+            //}
+
         }
     }
-
 }

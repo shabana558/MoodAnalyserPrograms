@@ -43,10 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerInfo.cs" />
     <Compile Include="CustomMoodAnalyserException.cs" />
     <Compile Include="MoodAnalyser.cs" />
+    <Compile Include="MoodAnalyser1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="propertyInfo.cs" />
+    <Compile Include="Reflections\Customer.cs" />
+    <Compile Include="Reflections\MoodAnalyserFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

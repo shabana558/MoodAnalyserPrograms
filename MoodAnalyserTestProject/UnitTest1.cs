@@ -1,12 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using MoodAnalyserPrograms;
+using MoodAnalyserPrograms.Reflections;
 
 namespace MoodAnalyserTestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class MoodAnalyserTestClass
     {
+        MoodAnalyserFactory factory;
+        public void Setup()
+        {
+            factory = new MoodAnalyserFactory();
+        }
+
+
         [TestCategory("Exception")]
         [TestMethod]
         public void GivenHappyMessageReturnHappyMood()
@@ -127,9 +135,32 @@ namespace MoodAnalyserTestProject
             }
             //Assert
         }
+        ///Tc-4-Create default constructor using reflection
+        ///
+        [TestCategory("Reflection")]
+        [TestMethod]
+        public void Given_MoodAnalyser_using_Reflection_Return_defaultConstructor()
+        {
+            Customer expected=new Customer();
+            object obj = null;
+            try
+            {
+                //Act
+                obj = factory.CreateMoodAnalyserObject("MoodAnalyserPrograms.MoodAnalyser", "MoodAnalyser");
+            }
+            catch (CustomMoodAnalyserException exception)
+            {
+                //Assert
+                throw new Exception(exception.Message);
+
+            }
+          // obj.Equals(expected);
+          Assert.AreEqual(expected, obj);
+        }
+
 
 
     }
 
-    
+
 }
