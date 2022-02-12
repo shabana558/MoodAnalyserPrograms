@@ -71,7 +71,25 @@ namespace MoodAnalyserPrograms.Reflections
             }
         }
 
-        public object CreateMoodAnalyserParameterisedObject(string v1, string v2, string message)
+       public string InvokeAnalyserMethod(string message,string methodName)
+        {
+            try
+            {
+                Type type=typeof(MoodAnalyser);
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                MoodAnalyserFactory factory =new MoodAnalyserFactory();
+                object moodAnalyserObject =factory.CreateMoodAnalyserParameterizedObject("MoodAnalyserPrograms.MoodAnalyser","MoodAnalyser");
+                object info = methodInfo.Invoke(moodAnalyserObject, null);
+                return info.ToString();
+
+            }
+            catch (NullReferenceException)
+            {
+                throw new CustomMoodAnalyserException(CustomMoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "method not found");
+            }
+        }
+
+        private object CreateMoodAnalyserParameterizedObject(string v1, string v2)
         {
             throw new NotImplementedException();
         }

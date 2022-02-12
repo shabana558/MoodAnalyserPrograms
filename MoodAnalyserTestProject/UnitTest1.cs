@@ -178,9 +178,36 @@ namespace MoodAnalyserTestProject
             }
             actual.Equals(expected);
         }
-    }
 
+        [TestCategory("Reflection")]
+        [TestMethod]
+        public void Given_MoodAnalyserwithMessage_Using_reflection_Return_Method()
+        {
+            string message = "Iam in sad mood";
+            string methodName = "AnalyseMethod";
+            string expected = "sad";
+            string actual = "";
+            try
+            {
+                // MoodAnalyserFactory=new MoodAnalyserFactory();
+                //Act
+                actual = factory.InvokeAnalyserMethod(message, methodName);
+            }
+            catch (CustomMoodAnalyserException exception)
+            {
+                //Assert
+                throw new Exception(exception.Message);
+            }
+            Assert.AreEqual(expected, actual);
+        }
+    }
 }
+
+
+
+    
+
+
 
 
 
